@@ -7,7 +7,7 @@
       <label for="password">Password</label>
       <input v-model="password" type="text" id="password" name="password">
 
-      <button v-on:click="myMethod($event)">Login</button>
+      <button v-on:click="login($event)">Login</button>
     </div>
   </div>
 </template>
@@ -15,6 +15,7 @@
 <script>
 export default {
   name: 'Login',
+
   data() {
     return {
       username: "",
@@ -23,17 +24,14 @@ export default {
   },
 
   methods: {
-    myMethod: async function myMethod() {
-      await this.$axios.$get('/api/v1/auth/csrf-cookie');
-
-      await this.$axios.$post('/api/v1/auth/simpleauth/login', {
-        email: this.username,
-        password: this.password
-      })
-      .then(() => {
-        this.$router.push('/home');
-      })
+    login: async function login() {
+      this.$auth.login({
+        data: {
+          email: this.username,
+          password: this.password
+        }
+      }).then(() => this.$toast.success('Logged In!'))
     }
-  },
+  }
 }
 </script>

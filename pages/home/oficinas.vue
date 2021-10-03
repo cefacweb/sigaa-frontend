@@ -6,6 +6,7 @@
 
 <script lang="ts">
 export default {
-  layout: 'logged'
+  layout: 'logged',
+  middleware: 'auth'
 }
 </script>

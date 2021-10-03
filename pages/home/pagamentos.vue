@@ -19,6 +19,7 @@
 export default {
   name: 'Login',
   layout: 'logged',
+  middleware: 'auth',
 
   data() {
     return {

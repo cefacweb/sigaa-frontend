@@ -50,7 +50,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -67,6 +68,22 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
+        }
+      }
+    }
+  },
+
+  auth: {
+    strategies: {
+      cookie: {
+        cookie: {
+          name: 'XSRF-TOKEN',
+        },
+        endpoints: {
+          csrf: { url: 'api/v1/auth/csrf' },
+          login: { url: 'api/v1/auth/simpleauth/login', method: 'post' },
+          logout: { url: 'api/v1/auth/simpleauth/logout', method: 'post' },
+          user: { url: 'api/v1/users', method: 'get' }
         }
       }
     }
