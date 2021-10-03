@@ -4,6 +4,9 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  // Target: https://go.nuxtjs.dev/config-target
+  target: 'static',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: 'SIGAA - %s',
@@ -41,10 +44,13 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/proxy'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    // https://go.nuxtjs.dev/axios
+    '@nuxtjs/axios'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -66,7 +72,23 @@ export default {
     }
   },
 
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    withCredentials: true,
+    baseURL: process.env.apiUrl
+  },
+
+  proxy: [
+    'http://localhost/api',
+    'http://localhost/admin',
+  ],
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    apiUrl: process.env.BASE_URL || 'http://localhost'
   }
 }
