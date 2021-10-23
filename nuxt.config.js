@@ -44,14 +44,15 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/toast'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -74,16 +75,21 @@ export default {
   },
 
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      home: '/home'
+    },
     strategies: {
       cookie: {
         cookie: {
           name: 'XSRF-TOKEN',
         },
         endpoints: {
-          csrf: { url: 'api/v1/auth/csrf' },
+          csrf: { url: 'api/v1/auth/csrf-cookie' },
           login: { url: 'api/v1/auth/simpleauth/login', method: 'post' },
           logout: { url: 'api/v1/auth/simpleauth/logout', method: 'post' },
-          user: { url: 'api/v1/users', method: 'get' }
+          user: { url: 'api/v1/user', method: 'get' }
         }
       }
     }
