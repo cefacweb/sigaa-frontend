@@ -1,6 +1,6 @@
 <template>
   <div>
-    pagamentos
+    atendimentos
   </div>
 </template>
 

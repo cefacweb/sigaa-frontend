@@ -1,6 +1,6 @@
 <template>
   <div>
-    index
+    alimentos
   </div>
 </template>
 

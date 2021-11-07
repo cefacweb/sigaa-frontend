@@ -45,6 +45,7 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/proxy',
+    '@nuxt/typescript-build'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -90,6 +91,9 @@ export default {
           login: { url: 'api/v1/auth/simpleauth/login', method: 'post' },
           logout: { url: 'api/v1/auth/simpleauth/logout', method: 'post' },
           user: { url: 'api/v1/user', method: 'get' }
+        },
+        user: {
+          property: 'data'
         }
       }
     }
