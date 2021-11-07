@@ -4,6 +4,9 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  // Target: https://go.nuxtjs.dev/config-target
+  target: 'static',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: 'SIGAA - %s',
@@ -41,10 +44,16 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/proxy',
+    '@nuxt/typescript-build'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    // https://go.nuxtjs.dev/axios
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/toast'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -66,7 +75,47 @@ export default {
     }
   },
 
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      home: '/home'
+    },
+    strategies: {
+      cookie: {
+        cookie: {
+          name: 'XSRF-TOKEN',
+        },
+        endpoints: {
+          csrf: { url: 'api/v1/auth/csrf-cookie' },
+          login: { url: 'api/v1/auth/simpleauth/login', method: 'post' },
+          logout: { url: 'api/v1/auth/simpleauth/logout', method: 'post' },
+          user: { url: 'api/v1/user', method: 'get' }
+        },
+        user: {
+          property: 'data'
+        }
+      }
+    }
+  },
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    withCredentials: true,
+    baseURL: process.env.apiUrl
+  },
+
+  proxy: [
+    'http://localhost/api',
+    'http://localhost/admin',
+  ],
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    apiUrl: process.env.BASE_URL || 'http://localhost'
   }
 }
