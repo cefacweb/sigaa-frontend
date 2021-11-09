@@ -1,11 +1,18 @@
+if (process.env.NODE_ENV === "local") require("dotenv").config({ path: '.env' });
+
 import colors from 'vuetify/es5/util/colors'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+  ssr: true,
 
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: 'server',
+
+  server: {
+    host: '0',
+    port: '3000'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -44,8 +51,7 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/proxy',
-    '@nuxt/typescript-build'
+    '@nuxtjs/proxy'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -53,7 +59,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    '@nuxtjs/dotenv'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -102,7 +109,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     withCredentials: true,
-    baseURL: process.env.apiUrl
+    baseURL: process.env.API_URL || 'http://app.gambiarra.net'
   },
 
   proxy: [
@@ -115,7 +122,7 @@ export default {
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    apiUrl: process.env.BASE_URL || 'http://localhost'
+    baseUrl: process.env.BASE_URL || 'https://app.gambiarra.net',
+    apiUrl: process.env.API_URL || 'http://sigaa_nginx'
   }
 }

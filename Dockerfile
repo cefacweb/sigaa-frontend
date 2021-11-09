@@ -4,11 +4,13 @@ WORKDIR /app
 
 COPY . .
 
+RUN npm install -g husky
+
 RUN npm ci --no-package-lock
 
 RUN npm run build
 
-RUN npm run generate
+RUN NODE_ENV=production npm run generate
 
 FROM nginx:stable-alpine
 
