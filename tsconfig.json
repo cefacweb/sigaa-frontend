@@ -27,7 +27,8 @@
       "@nuxt/types",
       "@types/node",
       "@nuxtjs/auth-next",
-      "@nuxtjs/toast"
+      "@nuxtjs/toast",
+      "vuetify"
     ]
   },
   "exclude": [
